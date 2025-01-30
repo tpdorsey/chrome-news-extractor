@@ -13,8 +13,20 @@ function extractPageData() {
         articleBody = document.querySelector('.grid-body')?.innerText || 'No grid-body content found'; // Get text from grid-body
     } else if (url.includes("nytimes.com")) {
         sourceTitle = "The New York Times";
-        headline = document.querySelector('h1')?.innerText || 'No headline found'; // NYT-specific H1
-        articleBody = document.querySelector('[name="articleBody"]')?.innerText || 'No article body content found'; // NYT article body
+
+        const blogPostElement = document.querySelector('div[data-testid="live-blog-post"].pinned-post');
+
+        if (blogPostElement) {
+            headline = document.querySelector('h2')?.innerText;
+            const paragraphs = blogPostElement.querySelectorAll('p') || 'No article body content found';
+            const textContent = Array.from(paragraphs)
+                .map(p => p.innerText)
+                .join('\n'); // Join paragraphs with a newline
+            articleBody = textContent;
+        } else {
+            headline = document.querySelector('h1')?.innerText || 'No headline found'; // NYT-specific H1
+            articleBody = document.querySelector('[name="articleBody"]')?.innerText || 'No article body content found'; // NYT article body
+        }
     } else if (url.includes("cnn.com")) {
         sourceTitle = "CNN";
         headline = document.querySelector('h1')?.innerText || 'No H1 found'; // CNN-specific H1

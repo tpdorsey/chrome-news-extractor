@@ -12,7 +12,12 @@
         }
     ],
     "action": {
-        "default_popup": "popup.html",
-        "default_icon": "newspaper.png"
+        "default_popup": "popup.html"
+    },
+    "icons": {
+        "16": "newspaper-16.png",
+        "32": "newspaper-32.png",
+        "48": "newspaper-48.png",
+        "128": "newspaper-128.png"
     }
 }
