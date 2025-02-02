@@ -39,6 +39,10 @@ function extractPageData() {
         sourceTitle = "NBC News";
         headline = document.querySelector('h1')?.innerText || 'No H1 found'; // NBC News-specific H1
         articleBody = document.querySelector('.article-body__content')?.innerText || 'No article content found'; // NBC News content
+    }  else if (url.includes("wsj.com")) {
+        sourceTitle = "Wall Street Journal";
+        headline = document.querySelector('h1')?.innerText || 'No H1 found'; // WSJ-specific H1
+        articleBody = document.querySelector('div.crawler section')?.innerText || 'No article content found'; // WSJ content
     }
 
   
