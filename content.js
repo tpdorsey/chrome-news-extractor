@@ -30,7 +30,7 @@ function extractPageData() {
     } else if (url.includes("cnn.com")) {
         sourceTitle = "CNN";
         headline = document.querySelector('h1')?.innerText || 'No H1 found'; // CNN-specific H1
-        articleBody = document.querySelector('article')?.innerText || 'No article content found'; // CNN content
+        articleBody = document.querySelector('.article__content')?.innerText || 'No article content found'; // CNN content
     } else if (url.includes("foxnews.com")) {
         sourceTitle = "Fox News";
         headline = document.querySelector('h1')?.innerText || 'No H1 found'; // FoxNews-specific H1
@@ -53,7 +53,7 @@ function extractPageData() {
         headline, // Extracted headline
         text: articleBody, // Extracted text from the grid body or equivalent
     };
-  }
+}
   
 // Listen for messages from the popup
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
