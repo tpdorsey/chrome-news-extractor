@@ -36,9 +36,24 @@ function extractPageData() {
 
     } else if (url.includes("cnn.com")) {
         sourceTitle = "CNN";
-        headline = document.querySelector('h1')?.innerText || 'No H1 found'; 
-        articleBody = document.querySelector('.article__content')?.innerText || 'No article content found'; 
 
+        if (document.querySelector('.layout-live-story__content-wrapper')) {
+            // live blog
+            headline = document.querySelector('h1')?.innerText || 'No headline found';
+            // Select all relevant elements (h2 for subheadings and p for content)
+            const elements = document.querySelectorAll('.layout-live-story__main h2, .layout-live-story__main p.paragraph');
+
+            // Extract text content with Markdown headers
+            const textContent = Array.from(elements)
+                .map(el => el.tagName === 'H2' ? `## ${el.innerText.trim()}` : el.innerText.trim()) // Markdown for headers
+                .join('\n\n'); // Double newline for better readability
+
+            articleBody = textContent || 'No article body content found';
+        } else {
+            // regular article
+            headline = document.querySelector('h1')?.innerText || 'No H1 found'; 
+            articleBody = document.querySelector('.article__content')?.innerText || 'No article content found'; 
+        }
     } else if (url.includes("foxnews.com")) {
         sourceTitle = "Fox News";
         headline = document.querySelector('h1')?.innerText || 'No H1 found'; 
