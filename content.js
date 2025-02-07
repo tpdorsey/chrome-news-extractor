@@ -46,6 +46,13 @@ function extractPageData() {
             articleSelector: '.article-body'
         }));
 
+    } else if (url.includes("foxbusiness.com")) {
+        sourceTitle = "Fox Business";
+        ({ headline, articleBody } = extractHeadlineAndBody({
+            headlineSelector: 'h1',
+            articleSelector: '.article-body'
+        }));
+
     } else if (url.includes("nbcnews.com")) {
         sourceTitle = "NBC News";
         ({ headline, articleBody } = extractHeadlineAndBody({
