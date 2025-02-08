@@ -84,7 +84,25 @@ function extractPageData() {
             headlineSelector: 'h1',
             articleSelector: '.grid-body'
         }));
-    }
+    } else if (url.includes("bbc.com")) {
+        sourceTitle = "BBC";
+        ({ headline, articleBody } = extractLiveBlogContent('h1', 'p'));
+    } else if (url.includes("aljazeera.com")) {
+        sourceTitle = "Al Jazeera";
+        ({ headline, articleBody } = extractLiveBlogContent('h1', 'p'));
+    } else if (url.includes("theguardian.com")) {
+        sourceTitle = "The Guardian";
+        ({ headline, articleBody } = extractLiveBlogContent('h1', 'p'));
+    } else if (url.includes("independent.co.uk")) {
+        sourceTitle = "The Independent";
+        ({ headline, articleBody } = extractLiveBlogContent('h1', 'p'));
+    } else if (url.includes("spiegel.de")) {
+        sourceTitle = "Der Spiegel";
+        ({ headline, articleBody } = extractLiveBlogContent('h2', 'p'));
+    } else {
+        sourceTitle = "";
+        ({ headline, articleBody } = extractLiveBlogContent('h1', 'p'));
+    } 
 
     return { source: sourceTitle, title, url, headline, text: articleBody };
 }
